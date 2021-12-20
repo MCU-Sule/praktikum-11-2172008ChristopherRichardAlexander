@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="2172008 Christopher Richard">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: coral;
+            text-align: center;
+        }
+        div{
+            position: absolute;
+            bottom: 10px;
+            left: 45%;
+        }
+        h1{
+            margin-top: 250px;
+        }
+    </style>
+</head>
+<body onload="auto()">
+    <h1 id="here"></h1>
+    <div>Speed<input value="1" min="1" max="10" id="fast" type="number"></div>
+    <script>
+        let i = 0;
+        let kalimat = "We Love Programming! ";
+
+        function auto(){
+            let faster = parseInt(document.querySelector("#fast").value);
+
+            if( i<kalimat.length ){
+                document.querySelector("#here").innerHTML+= kalimat.charAt(i);
+                i++;
+                if(i==kalimat.length){
+                    i=0;
+                    document.querySelector("#here").innerHTML="";
+                }
+
+                setTimeout(auto, (faster*15));
+                console.log(faster*15)
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="2172008 Christopher Richard" />
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+        }
+
+      .kotak {
+        border: 2px solid black;
+        width: 200px;
+        height: 200px;
+        float: left;
+      }
+      .container {
+        height: 404px;
+        width: 408px;
+        margin: auto;
+        margin-bottom: 20px;
+      }
+      .containergambar {
+        height: 202px;
+        width: 812px;
+        margin: auto;
+        text-align: center;
+      }
+      button {
+        width: 120px;
+        height: 30px;
+        margin: auto;
+      }
+      .footer {
+        background-color: aqua;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div ondragover="drop1(event)" ondrop="drop(event, 'gambar1')" id="kotak1" class="kotak"></div>
+      <div ondragover="drop1(event)" ondrop="drop(event, 'gambar2')" id="kotak2" class="kotak"></div>
+      <div ondragover="drop1(event)" ondrop="drop(event, 'gambar4')" id="kotak3" class="kotak"></div>
+      <div ondragover="drop1(event)" ondrop="drop(event, 'gambar3')" id="kotak4" class="kotak"></div>
+    </div>
+    <div class="containergambar">
+      <img ondragstart="drag(event, 'gbr1')" id="gbr1" draggable="true" />
+      <img ondragstart="drag(event, 'gbr2')" id="gbr2" draggable="true" />
+      <img ondragstart="drag(event, 'gbr3')" id="gbr3" draggable="true" />
+      <img ondragstart="drag(event, 'gbr4')" id="gbr4" draggable="true" />
+      
+    </div>
+    <button onclick="reset()">Restart Game</button>
+    <br />
+    <div class="footer">
+      <p>Created by Christopher Richard Alexander (2172008) &copy; 2021</p>
+    </div>
+    <script>
+      const a = [];
+      let check = 0;
+      let win = 0;
+
+      for (let i = 0; i < 4; i++) {
+        while (true) {
+          check = 0;
+          a[i] = Math.floor(Math.random() * 4) + 1;
+          for (let j = 0; j < i; j++) {
+            if (a[i] == a[j]) {
+              check = 1;
+            }
+          }
+          if (check == 0) {
+            break;
+          }
+        }
+        let gambar = "gbr" + (i + 1);
+        document.getElementById(gambar).src = a[i] + ".jpg";
+        document.getElementById(gambar).classList.add("gambar"+a[i]);
+      }
+
+      function drop(e, user) {
+        if(user != x){
+            alert("Wrong Image!")
+        }
+        else{
+        e.preventDefault();
+        var data = event.dataTransfer.getData(user);
+        e.target.appendChild(document.getElementById(data));
+        win++
+        }
+        if(win==4){
+          alert("You Win!")
+        }
+        
+      }
+
+      function drop1(e) {
+        e.preventDefault();
+      }
+
+      var x;
+      function drag(e, user) {
+        x= document.getElementById(user).className;
+        e.dataTransfer.setData(x, event.target.id);
+        console.log(x)
+      }
+
+      function reset(){
+          location.reload();
+      }
+    </script>
+  </body>
+</html>

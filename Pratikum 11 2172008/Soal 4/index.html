@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="2172008 Christopher Richard">
+    <title>Document</title>
+</head>
+    <style>
+      p{
+          padding-top: 50px;
+          font-size: xx-large;
+      }
+      .suitt{
+          width: 60px;
+          height: 60px;
+          border: 1px solid black;
+          float: left;
+          margin: 0px 105px;
+      }
+      .container{
+          width: 820px;
+          height: 164px;
+          border: 2px solid black;
+          margin: auto;
+      }
+      .baris{
+          width: 820px;
+          height: 82px;
+      }
+      .kotak{
+          border: 1px solid black;
+          width: 80px;
+          height: 80px;
+          float: left;
+          font-size: xx-large;
+      }
+      body{
+          text-align: center;
+      }
+      .semua{
+          width:  820px;
+          height: 62px;
+          margin: auto;
+          margin-top: 10px;
+      }
+      textarea{
+          margin-top: 10px;
+      }
+      #history{
+          margin-top: 50px;
+          overflow: auto;
+          width: 820px;
+          height: 164px;
+          border: 2px solid black;
+          margin: auto;
+          text-align: left;
+      }
+      
+    </style>
+  </head>
+  <body>
+      <div class="container">
+        <div class="baris">
+            <div id="poinUser1" class="kotak">P</div> <div id="poinUser2" class="kotak"></div> <div id="poinUser3" class="kotak"></div> <div id="poinUser4" class="kotak"></div> <div id="poinUser5" class="kotak"></div> <div id="poinUser6" class="kotak"></div> <div id="poinUser7" class="kotak"></div> <div id="poinUser8" class="kotak"></div> <div id="poinUser9" class="kotak"></div> <div id="poinUser10" class="kotak"></div>
+        </div>
+        <div class="baris">
+             <div id="poinBot1" class="kotak">E</div> <div id="poinBot2" class="kotak"></div> <div id="poinBot3" class="kotak"></div> <div id="poinBot4" class="kotak"></div> <div id="poinBot5" class="kotak"></div> <div id="poinBot6" class="kotak"></div> <div id="poinBot7" class="kotak"></div> <div id="poinBot8" class="kotak"></div> <div id="poinBot9" class="kotak"></div> <div id="poinBot10" class="kotak"></div>
+        </div>
+      </div>
+      <div id="history" ></div>
+    <div class="semua">
+      <div class="suitt" onclick="suit('batu')">Batu</div>
+      <div class="suitt" onclick="suit('gunting')">Gunting</div>
+      <div class="suitt" onclick="suit('kertas')">Kertas</div>
+    </div>
+    <script>
+        let poinBot=1;
+        let poinUser=1;
+        const suitBot = ["batu","gunting","kertas"];
+
+        function suit(user){
+            let random = Math.floor(Math.random()*3-0);
+            let bot = suitBot[random];
+            if(user==bot){
+                document.querySelector("#history").innerHTML+= user+" (User) ketemu "+bot+" (com), Draw <br>";
+            }
+            else if ((user=="batu" && bot=="gunting")||(user=="gunting"&&bot=="kertas")||(user=="kertas"&&bot=="batu")){
+                document.querySelector("#history").innerHTML+= user+" (User) ketemu "+bot+" (com), Pemain maju <br>";
+                document.querySelector("#poinUser"+poinUser).innerHTML="";
+                poinUser++;
+                document.querySelector("#poinUser"+poinUser).innerHTML="P";
+            }
+            else{
+                document.querySelector("#history").innerHTML+=user+" (User) ketemu "+bot+" (com), Musuh Maju <br>";
+                document.querySelector("#poinBot"+poinBot).innerHTML="";
+                poinBot++;
+                document.querySelector("#poinBot"+poinBot).innerHTML="E";
+            }
+        
+            if(poinUser==10){
+                alert("You Win, Try Again?");
+                document.querySelector("#poinUser"+poinUser).innerHTML="";
+                document.querySelector("#poinBot"+poinBot).innerHTML="";
+                document.querySelector("#history").innerHTML="";
+                poinUser=1;
+                poinBot=1;
+                document.querySelector("#poinBot"+poinBot).innerHTML="E";
+                document.querySelector("#poinUser"+poinUser).innerHTML="P";
+            }
+            if(poinBot==10){
+                alert("You Lose, Try Again?");
+                document.querySelector("#poinBot"+poinBot).innerHTML="";
+                document.querySelector("#poinUser"+poinUser).innerHTML="";
+                document.querySelector("#history").innerHTML="";
+                poinUser=1;
+                poinBot=1;
+                document.querySelector("#poinBot"+poinBot).innerHTML="E";
+                document.querySelector("#poinUser"+poinUser).innerHTML="P";
+            }
+        }
+    </script>
+  </body>
+</html>
